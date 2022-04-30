@@ -1,0 +1,212 @@
+        /* PHP FULL STACK - CaC 22035 - 1er C 2022 - TP "PANTALLA DIVIDA" */
+        /* QUE UTILIZO::
+           - Maquetado: uso flexbox. 
+           - MediaQuerys: para emular los 5 niveles de Bootstrap.
+           - Animaciones y Transiciones. Z-Index y pseudoclases para :hover sobre boton "Mas Infor".
+           - Fuentes descargadas.           
+        */
+        @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');/* uso Google Font: Roboto */
+        *{
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+        }             
+        .container{
+            width: 100%;    /* uso % para definir ancho */
+            height: 100%;  
+            display: flex;
+            flex-direction: column;     /* lo encaro column xq uso paradigma Mobile First. Program 1ero para lo mas chicos y dps con MediaQuerys lo adapto a row cuando supere el nivel breakpoint bootstrap de "md" (768px ancho viewport) */
+            justify-content: stretch;   /* alineacion del main-axis (horizontal), para ocupar todo ancho del contenedor */
+            align-items: stretch;       /* cross-axis es vertical y ocupara todo el alto del contenedor */
+            border: 0px;
+            border-style: none;
+            overflow: hidden;            
+            font-family: 'Roboto', sans-serif;
+        }
+        .container__hijo{    /* uso paradigma Mobile First */
+            width: 100vw;    /* uso tamaño sobre viewport para definir alto y ancho de los hijos */
+            height: 50vh;
+        }            
+        .hijoIzq{
+            background-color: rgb(252,210,30); 
+            padding: 5% 20% 5% 5%;   /* distancia del borde al contenido del bloque (top, right, bottom, left) */
+            /* overflow: auto; */
+        }
+        .hijoDer{
+            background-color: rgb(218, 218, 218); /* pongo color de fondo semejante a la imagen x si no se cargara o tardara en descargarse, aunque aca la uso localmente */
+            /* background-image: url("img/CaCPHP22035_pantalla_dividida_foto.png");
+            background-size: cover; */
+        }
+        .container__hijo__p__primerLinea{
+            color: black;
+            font: bold;
+            font-size: 1rem;
+        }
+        .container__hijo__p__segundaLinea{
+            color: white;
+            font: bold;
+            font-size: 1rem;
+        }
+        .container_informacion{
+            /* Este div al ppio estará display:none (no desplegado). Y al :hover del boton "Mas Info", se visibizara con animaciones y transiciones */
+            display: none;
+            background-color: darkorange;
+        }
+        .container__hijo__p__contenido{
+            font-size: 0.5rem;  
+            font:normal;
+            margin-top: 20px;   
+            margin-bottom: 20px;      
+        }        
+        .container__hijo__imagen{ /* oucpara (responsivamente) el 100% del bloque contenedor */
+            width: 100%;
+            height: 100%;
+        }
+        button{
+            border: 1px;
+            border-color: white;
+            color: white;
+            border-style: solid;
+            border-radius: 40px;
+            background-color: rgba(252, 211, 30, 0);  /* uso mismo color que el fondo, pero le pongo Transparente. Y on :hover, pongo transparency 0% */
+            padding: 5px 5px;
+            font-size: 0.5rem;
+            text-align: center;
+            cursor: pointer;
+        }
+        button:hover{              /* uso Pseudoclase para mostrar información onMouseOver */
+            color: white;
+            background-color: black;
+            border-color: black;
+        }
+
+        /* Hago Responsive la pantalla dividida, para que en algun momento en lugar de dividires horizontalmente (row) lo haga verticalmente (column) 
+            - respeto los 5 niveles de Breakpoint Boostrap.
+            - pero tmb meto una dimension anterior a xs.
+        */
+        @media only screen and (max-width: 299.9px){ /* xs: como parto de Mobile First, todo los estilos base son para XS y dps con media querys de aqui abajo, los adapto  */            
+
+        }         
+        @media only screen and (min-width: 300px) and (max-width: 575.9px){ /* xs: como parto de Mobile First, todo los estilos base son para XS y dps con media querys de aqui abajo, los adapto  */   
+            button{
+               font-size: 0.7rem;
+            }
+            .container__hijo__p__contenido{
+                font-size: 0.6rem;   
+                margin-top: 10px;
+                margin-bottom: 10px;
+            }  
+            .container__hijo__p__primerLinea{
+                font-size: 1.5rem;
+                margin-top: 10px;
+
+            }
+            .container__hijo__p__segundaLinea{
+                font-size: 1.5rem;
+            } 
+        } 
+        @media only screen and (min-width: 576px) and (max-width: 767.98px){ /* sm */
+            button{
+               padding: 10px 10px;
+               font-size: 0.75rem;
+            }
+            .container__hijo__p__contenido{
+                font-size: 0.75rem;   
+                margin-top: 10px;
+                margin-bottom: 10px;                
+            }   
+            .container__hijo__p__primerLinea{
+                font-size: 2rem;
+                margin-top: 10px;
+            }
+            .container__hijo__p__segundaLinea{
+                font-size: 2rem;
+            }             
+        } 
+        
+        @media only screen and (min-width: 768px) and (max-width: 991.98px){ /* md */ /* si ancho viewport <900px: cambio distribucion flexbox a row xq parto de Mobile First, y mantengo cambio tamaños de las cajas para q sigan ocupando todo el viewport pero ahora el direction row */
+            button{
+                padding: 10px 10px;
+                font-size: 0.85rem;
+                border: 2px;
+                border-color: white;
+                border-style: solid;
+            }
+            .container__hijo__p__contenido{
+                font-size: 0.85rem;   
+                margin-top: 10px;
+                margin-bottom: 10px;                
+            }   
+            .container__hijo__p__primerLinea{
+                font-size: 2.5rem;                
+                margin-top: 10px;
+            }
+            .container__hijo__p__segundaLinea{
+                font-size: 2.5rem;
+            } 
+            .container{                 /* aca cambio para q se desplieguen direction row en lugar de columnj, si ancho viewport > 768px (md) */
+                flex-direction: row;
+                justify-content: stretch;
+                align-items: stretch;
+            }
+            .container__hijo{
+                width: 50vw;                
+                height: 100vh;
+            }         
+        }  
+        @media only screen and  (min-width: 992px) and (max-width: 1199.98px){ /* lg */
+            button{
+               font-size: 1rem;
+               border: 2px;
+               border-color: white;
+               border-style: solid;
+            }
+            .container__hijo__p__contenido{
+                font-size: 0.9rem;   
+                margin-top: 20px;
+                margin-bottom: 20px;                
+            }   
+            .container__hijo__p__primerLinea{
+                font-size: 2.5rem;
+            }
+            .container__hijo__p__segundaLinea{
+                font-size: 2.5rem;
+            }  
+            .container{                 /* aca cambio para q se desplieguen direction row en lugar de columnj, si ancho viewport > 768px (md) */
+                flex-direction: row;
+                justify-content: stretch;
+                align-items: stretch;
+            }
+            .container__hijo{
+                width: 50vw;                
+                height: 100vh;
+            }              
+        }     
+        @media only screen and  (min-width: 1200px){ /* xl */
+            button{
+               font-size: 1rem;
+               border: 2px;
+               border-color: white;
+               border-style: solid;               
+            }
+            .container__hijo__p__contenido{
+                font-size: 1rem;   
+                margin-top: 20px;
+                margin-bottom: 20px;                  
+            }   
+            .container__hijo__p__primerLinea{
+                font-size: 2.5rem;
+            }
+            .container__hijo__p__segundaLinea{
+                font-size: 2.5rem;
+            }             
+            .container{                 /* aca cambio para q se desplieguen direction row en lugar de columnj, si ancho viewport > 768px (md) */
+                flex-direction: row;
+                justify-content: stretch;
+                align-items: stretch;
+            }
+            .container__hijo{
+                width: 50vw;                
+                height: 100vh;
+            }   
+        }  
